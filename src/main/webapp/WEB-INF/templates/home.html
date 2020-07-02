@@ -10,6 +10,77 @@
             background-color: rgb(240, 242, 245);
             padding: 10px;
         }
+
+        .layadmin-backlog {
+            display: block;
+            padding: 10px 15px;
+            background-color: #f8f8f8;
+            background-color: #f8f8f8;
+            color: #999;
+            border-radius: 2px;
+            transition: all .3s;
+            -webkit-transition: all .3s;
+        }
+
+        .layadmin-backlog-body {
+            display: block;
+            padding: 10px 15px;
+            background-color: #f8f8f8;
+            color: #999;
+            border-radius: 2px;
+            transition: all .3s;
+            -webkit-transition: all .3s;
+        }
+
+        .layadmin-backlog-body h3 {
+            padding-bottom: 10px;
+            font-size: 16px
+        }
+
+        .layadmin-backlog-body p cite {
+            font-style: normal;
+            font-size: 30px;
+            font-weight: 300;
+            color: #009688
+        }
+
+        .layadmin-backlog-body:hover {
+            background-color: #f2f2f2;
+            color: #888
+        }
+
+        /*斜方向彩带*/
+        .ribbon {
+            background-color: #a00;
+            overflow: hidden;
+            white-space: nowrap;
+            position: absolute;
+            /* shadom */
+            box-shadow: 0 0 10px #888;
+            /* rotate */
+            transform: rotate(45deg);
+            /* position */
+            right: -44px;
+            top: 36px;
+            z-index: 1000;
+        }
+
+        .ribbon a {
+            border: 1px solid #faa;
+            color: #fff;
+            display: block;
+            /*font: bold 81.25% 'Helvetica Neue', Helvetica, Arial, sans-serif;*/
+            margin: 1px 0;
+            padding: 10px 50px;
+            text-align: center;
+            text-decoration: none;
+            /* shadow */
+            text-shadow: 0 0 5px #444;
+        }
+
+        #zuyuan > li {
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
@@ -22,12 +93,14 @@
                         <div class="layui-card-header"><h2>小组成员 <i class="layui-icon layui-icon-group"
                                                                    style=" color: #1E9FFF;"></i></h2></div>
                         <div class="layui-card-body">
-                            <ul>
-                                <li>组长：<i class="layui-icon layui-icon-male"></i> 卢元庆</li>
-                                <li>组员：<i class="layui-icon layui-icon-male"></i> 谢川东</li>
-                                <li>组员：<i class="layui-icon layui-icon-male"></i> 李沅泽</li>
-                                <li>组员：<i class="layui-icon layui-icon-male"></i> 林雄</li>
-                                <li>组员：<i class="layui-icon layui-icon-female"></i> 孙菊红</li>
+                            <ul id="zuyuan">
+                                <li style="text-align: center">组长：<i class="layui-icon layui-icon-male"></i> 卢元庆</li>
+                                <li style="text-align: center">组员：<i class="layui-icon layui-icon-male"></i> 谢川东</li>
+                                <li style="text-align: center">组员：<i class="layui-icon layui-icon-male"></i> 李沅泽</li>
+                                <li style="text-align: center">组员：<i class="layui-icon layui-icon-male"></i><span
+                                        style="opacity: 0">林</span> 林雄
+                                </li>
+                                <li style="text-align: center">组员：<i class="layui-icon layui-icon-female"></i> 孙菊红</li>
                             </ul>
                         </div>
                     </div>
@@ -43,11 +116,12 @@
                             </div>
                             前端部分
                             <div class="layui-progress layui-progress-big" lay-showPercent="yes">
-                                <div class="layui-progress-bar layui-bg-blue" lay-percent="40%"></div>
+                                <div class="layui-progress-bar layui-bg-blue" lay-percent="60%"></div>
                             </div>
                             答辩部分
                             <div class="layui-progress layui-progress-big" lay-showPercent="yes">
-                                <div class="layui-progress-bar layui-bg-red" lay-percent="1%"></div>
+                                <!--                                TODO 待修改-->
+                                <div class="layui-progress-bar layui-bg-red" lay-percent="10%"></div>
                             </div>
                         </div>
                     </div>
@@ -55,11 +129,49 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-header">
-                            <h2 style="text-align: center;font-weight: bold">车库状况:先随便表格弄个占位</h2>
-                            <!--                            TOOD 可以弄个轮播图-->
+                            <h2 style="text-align: center;font-weight: bold">当前所在车库状况 <i
+                                    class="layui-icon layui-icon-console"></i></h2>
+
                         </div>
                         <div class="layui-card-body">
-                            <table class="layui-hide" id="demo" lay-filter="log"></table>
+
+                            <ul class="layui-row layui-col-space10 layui-this">
+                                <li class="layui-col-xs6">
+                                    <a class="layadmin-backlog-body">
+                                        <h3>车库名字</h3>
+                                        <p><cite id="name">null</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-xs6">
+                                    <a class="layadmin-backlog-body">
+                                        <h3>当前已使用车位数</h3>
+                                        <p><cite id="use">0</cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-xs6">
+                                    <a class="layadmin-backlog-body">
+                                        <h3>规划使用的车位数</h3>
+                                        <p><cite><span id="gui">0</span></cite></p>
+                                    </a>
+                                </li>
+                                <li class="layui-col-xs6">
+                                    <a class="layadmin-backlog-body">
+                                        <h3>最大车位数</h3>
+                                        <p><cite id="max">0</cite></p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <h3> 车库位置：<a
+                                    style="color: rgb(0,150,136)"
+                                    href="https://www.baidu.com/s?ie=UTF-8&wd=%E9%87%8D%E5%BA%86%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA%E5%A4%A7%E5%AD%A6%E5%9F%8E%E4%B8%9C%E8%B7%AF20%E5%8F%B7"><span
+                                    id="site">1111</span></a></h3>
+                            <fieldset class="layui-elem-field layui-field-title" style="margin: 10px 0 10px;">
+                                <legend> 车库使用率:</legend>
+                            </fieldset>
+                            <div class="layui-progress  layui-progress-big" lay-filter="pp">
+                                <div class="layui-progress-bar" lay-percent="0%"></div>
+                            </div>
+
                         </div>
                     </div>
 
@@ -67,7 +179,7 @@
             </div>
 
         </div>
-        <div class="layui-col-md5">
+        <div class="layui-col-md5" style="overflow: hidden">
             <div class="layui-card">
                 <div class="layui-card-header"><h2>项目介绍 <i class="layui-icon layui-icon-app"
                                                            style=" color: #1E9FFF;"></i></h2></div>
@@ -101,61 +213,35 @@
                     </div>
                 </div>
             </div>
+            <!-- 缎带 -->
+            <div class="ribbon">
+                <a target="_blank" href="https://github.com/someGenki/tingche_sys">Star on GitHub</a>
+            </div>
         </div>
+
 
     </div>
 </div>
 
 <script src="https://www.layuicdn.com/layui/layui.js"></script>
 <script>
-    //JavaScript代码区域
     layui.use('element', function () {
         var element = layui.element;
-        console.log(element)
+        var $ = layui.jquery
+        setTimeout(function () {
+            $.get('/tingche/home/info', data => {
+                const p = JSON.parse(data);
+                const pp = p.data
+                document.getElementById("name").innerHTML = pp.parkName;
+                document.getElementById("use").innerHTML = pp.currentUse;
+                document.getElementById("gui").innerHTML = pp.usableCapacity;
+                document.getElementById("max").innerHTML = pp.maxCapacity;
+                document.getElementById("site").innerHTML = pp.parkSite;
+                element.progress('pp', `${(pp.currentUse / pp.usableCapacity) * 100}%`)
+            })
+        }, 300)
     });
 </script>
-<script>
-    layui.use('table', function () {
-        var table = layui.table
-        var $ = layui.jquery
-        //执行一个 table 实例
-        var tab = table.render({
-            elem: '#demo',
-            height: 322,
-            url: '/tingche/role/all',
-            title: '车库状态',
-            limit: 2,
-            loading: 'true',
-            page: true,//开启分页
-            totalRow: false, //开启合计行
-            //表头
-            cols: [
-                [{
-                    fixed: 'left',
-                    type: 'checkbox'
-                },
-                    {
-                        field: 'roleId',
-                        title: '角色ID',
-                        width: 80
-                    },
-                    {
-                        field: 'degree',
-                        title: '角色等级',
-                        width: 120,
-                        sort: true
-                    },
-                    {
-                        field: 'description',
-                        title: '角色描述'
-                    },
 
-                ]
-            ]
-        });
-
-
-    })
-</script>
 </body>
 </html>

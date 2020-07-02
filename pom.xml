@@ -174,9 +174,9 @@
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
         </dependency>
-
-        <!--   shriro的核心包   主要在该项目用来完成密码的加密功能-->
-        <!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->
+<!--
+        &lt;!&ndash;   shriro的核心包   主要在该项目用来完成密码的加密功能&ndash;&gt;
+        &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.shiro/shiro-core &ndash;&gt;
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-core</artifactId>
@@ -188,12 +188,12 @@
             <version>3.0.9.RELEASE</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring4 -->
+        &lt;!&ndash; https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring4 &ndash;&gt;
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring5</artifactId>
             <version>3.0.9.RELEASE</version>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 

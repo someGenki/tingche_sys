@@ -1,7 +1,8 @@
 HELP.md
 mvnw
 target/
-
+tingche-src.rar
+*.rar
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**

@@ -59,6 +59,7 @@
     <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
     <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
     <mvc:resources location="/WEB-INF/img/" mapping="/img/**"/>
+    <mvc:resources location="/WEB-INF/layui/" mapping="/layui/**"/>
     <mvc:resources location="/WEB-INF/templates/" mapping="/templates/**"/>
 
 </beans>
