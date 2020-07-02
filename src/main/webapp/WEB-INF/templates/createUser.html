@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>创建用户</title>
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css"/>
+
+</head>
+<body>
+<div class="layui-elem-quote">
+    <h2 style="text-align: center;font-weight: bold">正在创建新的管理员用户</h2>
+</div>
+<!--Author:卢元庆-->
+<!--TODO 表单提交成功时先跳转到中间页提示操作成功，然后在跳转到home.html-->
+<form method="post" action="/tingche/user/create" class="layui-form"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+    <hr class="layui-bg-green">
+    <div class="layui-form-item">
+        <label for="user-name" class="layui-form-label">用户名</label>
+        <div class="layui-input-block">
+            <input onblur="isExist()" id="user-name" type="text" name="username" placeholder="请输入用户名" autocomplete="off"
+                   required lay-verify="required" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label for="user-pwd" class="layui-form-label">密码</label>
+        <div class="layui-input-block">
+            <input id="user-pwd" type="password" name="password" placeholder="请输入密码" autocomplete="off"
+                   required lay-verify="required" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择角色</label>
+        <div class="layui-input-block">
+            <select title="数字越低权限越高" required lay-verify="required" name="roleId" lay-filter="juese">
+                <option value="">请选择一个角色</option>
+                <option value="1">一级角色</option>
+                <option value="2">二级角色</option>
+                <option value="3">三级角色</option>
+                <option value="4">四级角色</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label for="desc" class="layui-form-label">描述</label>
+        <div class="layui-input-block">
+            <input id="desc" type="text" disabled name="username" placeholder="" autocomplete="off"
+                   required lay-verify="required" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">启用状态</label>
+        <div class="layui-input-block">
+            <input type="radio" name="status" value="true" title="启用" checked>
+            <input type="radio" name="status" value="false" title="冻结">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+    <!-- 更多表单结构排版请移步文档左侧【页面元素-表单】一项阅览 -->
+</form>
+
+<script src="https://www.layuicdn.com/layui/layui.js"></script>
+<script>
+
+</script>
+<script>
+
+    layui.use('form', function () {
+        var form = layui.form;
+        var $ = layui.jquery
+        form.on('select(juese)', function (data) {
+            $.get('/tingche/role/info/' + data.value, data => {
+                let parse = JSON.parse(data);
+                layer.msg("获取最新角色描述成功")
+                $("#desc").val(parse.data.description)
+            })
+        });
+    });
+
+    async function isExist() {
+        var $ = layui.jquery
+        let v = $("#user-name").val();
+        $.get('/tingche/user/exist/' + v, data => {
+            let parse = JSON.parse(data);
+            layer.msg(parse.msg);
+        })
+    }
+</script>
+</body>
+</html>

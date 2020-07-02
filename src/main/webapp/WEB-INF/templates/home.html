@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css"/>
+    <!--    <link rel="stylesheet" href="/tingche/css/layui.css">-->
+    <style>
+        body {
+            background-color: rgb(240, 242, 245);
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md7">
+            <div class="layui-row layui-col-space15">
+                <div class="layui-col-md4">
+                    <div style="height: 210px" class="layui-card">
+                        <div class="layui-card-header"><h2>小组成员 <i class="layui-icon layui-icon-group"
+                                                                   style=" color: #1E9FFF;"></i></h2></div>
+                        <div class="layui-card-body">
+                            <ul>
+                                <li>组长：<i class="layui-icon layui-icon-male"></i> 卢元庆</li>
+                                <li>组员：<i class="layui-icon layui-icon-male"></i> 谢川东</li>
+                                <li>组员：<i class="layui-icon layui-icon-male"></i> 李沅泽</li>
+                                <li>组员：<i class="layui-icon layui-icon-male"></i> 林雄</li>
+                                <li>组员：<i class="layui-icon layui-icon-female"></i> 孙菊红</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md8">
+                    <div style="height: 210px" class="layui-card">
+                        <div class="layui-card-header"><h2>项目进度 <i class="layui-icon layui-icon-time"
+                                                                   style=" color: #1E9FFF;"></i></h2></div>
+                        <div class="layui-card-body">
+                            后端部分
+                            <div class="layui-progress layui-progress-big" lay-showPercent="yes">
+                                <div class="layui-progress-bar layui-bg-green" lay-percent="50%"></div>
+                            </div>
+                            前端部分
+                            <div class="layui-progress layui-progress-big" lay-showPercent="yes">
+                                <div class="layui-progress-bar layui-bg-blue" lay-percent="40%"></div>
+                            </div>
+                            答辩部分
+                            <div class="layui-progress layui-progress-big" lay-showPercent="yes">
+                                <div class="layui-progress-bar layui-bg-red" lay-percent="1%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md12">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            <h2 style="text-align: center;font-weight: bold">车库状况:先随便表格弄个占位</h2>
+                            <!--                            TOOD 可以弄个轮播图-->
+                        </div>
+                        <div class="layui-card-body">
+                            <table class="layui-hide" id="demo" lay-filter="log"></table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-col-md5">
+            <div class="layui-card">
+                <div class="layui-card-header"><h2>项目介绍 <i class="layui-icon layui-icon-app"
+                                                           style=" color: #1E9FFF;"></i></h2></div>
+                <div class="layui-card-body">
+                    <h3>题目-停车场管理系统</h3>
+                    <div class="layui-elem-quote">
+                        为了解决这个停车难这一问题，无论是那些停车场的管理人员们，还是我们广大的车主们，
+                        都需要有一套安全可靠、设计成熟的停车管理系统来满足大家的使用需求。
+                        本系统的使用比起以往人工的传统记录，要更加的方便、可靠、高效，节约成本。停车管理系统是一套主要功能包括：
+                        车辆的登记入库，车辆的停车收费，车库容量显示和修改，车辆的出入日志等等的系统。该系统基于B/S模式，采用JavaEE开发、
+                        <s>Hibernate</s>
+                        Mybatis
+                        和Spring框架、MySQL数据库作为后台来实现
+                    </div>
+                    <h3>基本模块</h3>
+                    <div class="layui-elem-quote">
+                        <ul>
+                            <dl>系统管理</dl>
+                            <dl>车辆计费</dl>
+                            <dl>车库信息管理</dl>
+                            <dl>车辆出入库日志登记</dl>
+                        </ul>
+                    </div>
+                    <h3>相关技术</h3>
+                    <div class="layui-elem-quote">
+                        <ul>
+                            <dl>SSM框架</dl>
+                            <dl>layUI前端框架</dl>
+                            <dl>JQuery</dl>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://www.layuicdn.com/layui/layui.js"></script>
+<script>
+    //JavaScript代码区域
+    layui.use('element', function () {
+        var element = layui.element;
+        console.log(element)
+    });
+</script>
+<script>
+    layui.use('table', function () {
+        var table = layui.table
+        var $ = layui.jquery
+        //执行一个 table 实例
+        var tab = table.render({
+            elem: '#demo',
+            height: 322,
+            url: '/tingche/role/all',
+            title: '车库状态',
+            limit: 2,
+            loading: 'true',
+            page: true,//开启分页
+            totalRow: false, //开启合计行
+            //表头
+            cols: [
+                [{
+                    fixed: 'left',
+                    type: 'checkbox'
+                },
+                    {
+                        field: 'roleId',
+                        title: '角色ID',
+                        width: 80
+                    },
+                    {
+                        field: 'degree',
+                        title: '角色等级',
+                        width: 120,
+                        sort: true
+                    },
+                    {
+                        field: 'description',
+                        title: '角色描述'
+                    },
+
+                ]
+            ]
+        });
+
+
+    })
+</script>
+</body>
+</html>

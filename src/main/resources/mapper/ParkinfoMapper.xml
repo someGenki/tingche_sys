@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ting.dao.ParkinfoMapper">
+    <resultMap id="BaseResultMap" type="com.ting.pojo.Parkinfo">
+        <id column="park_id" jdbcType="INTEGER" property="parkId"/>
+        <result column="park_name" jdbcType="VARCHAR" property="parkName"/>
+        <result column="park_site" jdbcType="VARCHAR" property="parkSite"/>
+        <result column="max_capacity" jdbcType="INTEGER" property="maxCapacity"/>
+        <result column="usable_capacity" jdbcType="INTEGER" property="usableCapacity"/>
+        <result column="current_use" jdbcType="INTEGER" property="currentUse"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from parkinfo
+    where park_id = #{parkId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.ting.pojo.Parkinfo">
+    insert into parkinfo (park_id, park_name, park_site, 
+      max_capacity, usable_capacity, current_use
+      )
+    values (#{parkId,jdbcType=INTEGER}, #{parkName,jdbcType=VARCHAR}, #{parkSite,jdbcType=VARCHAR}, 
+      #{maxCapacity,jdbcType=INTEGER}, #{usableCapacity,jdbcType=INTEGER}, #{currentUse,jdbcType=INTEGER}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.ting.pojo.Parkinfo">
+    update parkinfo
+    set park_name = #{parkName,jdbcType=VARCHAR},
+      park_site = #{parkSite,jdbcType=VARCHAR},
+      max_capacity = #{maxCapacity,jdbcType=INTEGER},
+      usable_capacity = #{usableCapacity,jdbcType=INTEGER},
+      current_use = #{currentUse,jdbcType=INTEGER}
+    where park_id = #{parkId,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select park_id, park_name, park_site, max_capacity, usable_capacity, current_use
+    from parkinfo
+    where park_id = #{parkId,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select park_id, park_name, park_site, max_capacity, usable_capacity, current_use
+    from parkinfo
+  </select>
+</mapper>

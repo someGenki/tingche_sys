@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ting.dao.CarinUserMapper">
+    <resultMap id="BaseResultMap" type="com.ting.pojo.CarinUser">
+        <id column="rk_id" jdbcType="INTEGER" property="rkId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="rk_plate" jdbcType="VARCHAR" property="rkPlate"/>
+        <result column="rk_time" jdbcType="TIMESTAMP" property="rkTime"/>
+    </resultMap>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from carin
+    where rk_id = #{rkId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.ting.pojo.CarinUser">
+    insert into carin (rk_id, user_id, rk_plate, 
+      rk_time)
+    values (#{rkId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{rkPlate,jdbcType=VARCHAR}, 
+      #{rkTime,jdbcType=TIMESTAMP})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.ting.pojo.CarinUser">
+    update carin
+    set user_id = #{userId,jdbcType=INTEGER},
+      rk_plate = #{rkPlate,jdbcType=VARCHAR},
+      rk_time = #{rkTime,jdbcType=TIMESTAMP}
+    where rk_id = #{rkId,jdbcType=INTEGER}
+  </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select rk_id, user_id, rk_plate, rk_time
+    from carin
+    where rk_id = #{rkId,jdbcType=INTEGER}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select rk_id, user_id, rk_plate, rk_time
+    from carin
+  </select>
+</mapper>

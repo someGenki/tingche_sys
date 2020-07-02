@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>good</title>
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css"/>
+</head>
+<body>
+<!--需要使用表格加载数据-->
+<!--TODO 搜索框 -->
+
+<table class="layui-hide" id="user" lay-filter="good"></table>
+<script src="https://www.layuicdn.com/layui/layui.js"></script>
+<script>
+    layui.use('table', function () {
+        var table = layui.table
+        var form = layui.form
+        var $ = layui.jquery
+        var tab = table.render({
+            elem: '#user',
+            height: 312,
+            url: '/tingche/user/all',
+            cellMinWidth: 80,
+            title: '用户表',
+            limit: 4,
+            loading: 'true',
+            page: true,//开启分页
+            //表头
+            cols: [
+                [{
+                    fixed: 'left',
+                    type: 'checkbox'
+                },
+                    {
+                        field: 'userId',
+                        title: '用户ID',
+                        // width: 120
+                    },
+                    {
+                        field: 'roleId',
+                        title: '角色ID',
+                        // width: 120,
+                    },
+                    {
+                        field: 'username',
+                        title: '用户名',
+                        // width: 220,
+                    },
+                    {
+                        //参考:https://blog.csdn.net/qq_41463655/article/details/106881440?%3E
+                        field: 'state', width: 90, title: '禁/启用', templet: function (res) {
+                            let menuId = res.userId;
+                            if (res.status == true) {
+                                return "   <input type='checkbox'  menuId = '" + menuId + "' lay-filter='status' lay-skin='switch' lay-text='ON|OFF' checked>"
+                            } else if (res.status == false) {
+                                return "   <input type='checkbox'  menuId = '" + menuId + "'  lay-filter='status' lay-skin='switch' lay-text='ON|OFF'>"
+                            }
+                        }
+                    },
+
+                    {
+                        field: 'gmtCreate',
+                        title: '创建时间',
+                        templet: '<div>{{ layui.util.toDateString(d.pressTime, "yyyy-MM-dd HH:mm:ss") }}</div>'
+                        // width: 220
+                    },
+                    /*                    {
+                                            fixed: 'right',
+                                            title: '修改状态',
+                                            width: 165,
+                                            align: 'center',
+                                            toolbar: '#barDemo'
+                                        }*/
+                ]
+            ]
+        });
+
+        //监听操作
+        form.on('switch(status)', function (obj) {
+            layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
+            console.log(obj.elem.attributes['menuId'].nodeValue);
+            let uid = obj.elem.attributes['menuId'].nodeValue
+            console.log(obj.elem.checked);
+            let status = obj.elem.checked
+            $.get(`/tingche/user/update-status?uid=${uid}&status=${status == true ? 1 : 0}`, data => {
+                layer.msg(data)
+            })
+        });
+
+
+    })
+</script>
+</body>
+</html>
