@@ -34,4 +34,32 @@
     select rk_id, user_id, rk_plate, rk_time
     from carin
   </select>
+
+    <!--    from谢川东-->
+    <select id="selectAll1" parameterType="integer" resultType="tollDto">
+    select distinct c.rk_id,c.user_id,c.rk_plate,c.rk_time
+    from  carin c
+    where c.rk_time not in (select   p.rin_time from parklog p)
+    limit #{page},#{limit}
+  </select>
+
+    <select id="getCount" resultType="long">
+        select count(rk_plate) from carin
+    </select>
+    <select id="selectByIDorPlate" resultType="com.ting.pojo.TollDto">
+        select distinct c.rk_id,c.user_id,c.rk_plate,c.rk_time
+        from carin c
+        <where>
+            <if test="userId != null and userId != '' ">
+                c.user_id = #{userId}
+            </if>
+            <if test="plate != null and plate != '' ">
+                and rk_plate = #{plate}
+            </if>
+            <if test="1">
+                and c.rk_time not in (select p.rin_time from parklog p)
+            </if>
+        </where>
+        limit #{page},#{limit}
+    </select>
 </mapper>

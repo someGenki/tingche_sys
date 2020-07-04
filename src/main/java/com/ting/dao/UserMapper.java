@@ -1,6 +1,5 @@
 package com.ting.dao;
 
-import com.ting.pojo.Role;
 import com.ting.pojo.User;
 import org.apache.ibatis.annotations.*;
 

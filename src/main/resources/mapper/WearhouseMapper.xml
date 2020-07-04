@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--Author:林雄-->
+<mapper namespace="com.ting.dao.WearhouseMapper">
+    <resultMap id="BaseResultMap" type="com.ting.pojo.Wearhouse">
+        <id column="park_id" jdbcType="INTEGER" property="parkId"/>
+        <result column="park_name" jdbcType="VARCHAR" property="parkName"/>
+        <result column="park_site" jdbcType="VARCHAR" property="parkSite"/>
+        <result column="current_use" jdbcType="INTEGER" property="currentUse"/>
+        <result column="usable_capacity" jdbcType="INTEGER" property="usableCapacity"/>
+    </resultMap>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select park_id, park_name, park_site, current_use, usable_capacity
+        from parkinfo
+    </select>
+    <select id="selectPark" resultType="com.ting.pojo.Park" parameterType="java.lang.Integer">
+        select park_id, plate, rin_time
+        from parklog
+        where out_time is null
+        limit ${page}, ${limit}
+    </select>
+    <select id="getCount" resultType="long">
+        select count(log_id)
+        from parklog
+    </select>
+    <select id="selectByParkName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select park_id, park_name, park_site, current_use, usable_capacity
+        from parkinfo
+        <where>
+            <if test="park_name != null and park_name != '' ">
+                park_name = #{park_name, jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+    <select id="selectByPlate" resultType="com.ting.pojo.Park">
+        select park_id, plate, rin_time
+        from parklog
+        <where>
+            <if test="plate != null and plate != '' ">
+                plate = #{plate}
+            </if>
+            and out_time is null
+        </where>
+        limit #{page}, #{limit}
+    </select>
+</mapper>

@@ -51,7 +51,6 @@ public class UserServiceImpl implements UserService {
         //先要获取操作者的uid,然后去找它的rid,然后去找它的权限等级,最后相比较,小不能改大
         User user = mapper.selectByPrimaryKey(uid);
         Integer rid1 = user.getRoleId();
-
         return null;
     }
 

@@ -11,7 +11,7 @@ public interface ParklogMapper {
 
     Parklog selectByPrimaryKey(Integer logId);
 
-    List<Parklog> selectAll();
-
     int updateByPrimaryKey(Parklog record);
+
+    List<Parklog> selectAll();
 }

@@ -1,10 +1,72 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <!--    Author 李沅泽-->
     <meta charset="UTF-8">
     <title>车辆入库</title>
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css"/>
 </head>
 <body>
+<div class="layui-elem-quote">
+    <h2 style="text-align: center;font-weight: bold">正在登记入库</h2>
+</div>
+<form method="post" action="/tingche/carin/in" class="layui-form">
+    <hr class="layui-bg-green">
 
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户ID</label>
+        <div class="layui-input-block">
+            <input type="text" id="user-Id" name="userId" required lay-verify="required" placeholder="请输入用户ID"
+                   autocomplete="off" value="1"
+                   class="layui-input" required lay-verify="required">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">车牌号</label>
+        <div class="layui-input-block">
+            <input type="text" id="rk-plate" name="rkPlate" required lay-verify="required" placeholder="请输入车牌号"
+                   autocomplete="off"
+                   class="layui-input" required lay-verify="required">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择停车场</label>
+        <div class="layui-input-block">
+            <select required lay-verify="required" name="rkplate" lay-filter="cheku">
+                <option value="">请选择一个停车场</option>
+                <option value="1">重庆科技学院</option>
+                <option value="2">厦门大学</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+
+</form>
+
+<script src="https://www.layuicdn.com/layui/layui.js"></script>
+
+<script>
+    //查询选择的停车场还有没有车位
+    layui.use('form', function () {
+        var form = layui.form;
+        var $ = layui.jquery
+        form.on('select(cheku)', function (data) {
+            $.get('/tingche/carin/pki?pid=' + data.value, data => {
+                let a = JSON.parse(data);
+                console.log(a);
+                layer.msg(a.msg)
+            })
+        });
+    });
+</script>
 </body>
 </html>

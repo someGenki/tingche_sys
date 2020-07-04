@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<!--Author 孙菊红-->
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<link rel="stylesheet" href="layui/css/layui.css" media="all">
+<body>
+
+<div class="demoTable">
+    ID搜索：
+    <div class="layui-inline">
+        <input name="id" class="layui-input" id="ID" autocomplete="off">
+    </div>
+    用户ID:
+    <div class="layui-inline">
+        <input name="useid" class="layui-input" id="USEID" autocomplete="off">
+    </div>
+    <button type="button" class="layui-btn" data-type="reload" id="search">搜索</button>
+</div>
+<table class="layui-hide" id="demo" lay-filter="test"></table>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">添加</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+
+</script>
+
+</body>
+
+
+<script type="text/javascript" src="layui/layui.js"></script>
+<script>
+    layui.use('table', function () {
+
+        var table = layui.table //表格
+        var $ = layui.jquery
+        var tableIns = table.render({
+            elem: '#demo',
+            height: 420,
+            url: '/tingche/parklog/selectAll' //数据接口
+            ,
+            title: '用户表',
+            page: true //开启分页
+            ,
+            toolbar: '#barDemo' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,
+            totalRow: true //开启合计行
+            ,
+            cols: [
+                [ //表头
+                    {
+                        type: 'checkbox',
+                        fixed: 'left'
+                    }, {
+                    field: 'logId',
+                    title: 'ID',
+                    sort: true,
+                    fixed: 'left'
+                }, {
+                    field: 'userId',
+                    title: '用户名'
+
+                }, {
+                    field: 'parkId',
+                    title: '停车位'
+
+                }, {
+                    field: 'plate',
+                    title: '车牌号'
+                }, {
+                    field: 'rinTime',
+                    title: '入库时间',
+                    templet: '<div>{{ layui.util.toDateString(d.rinTime, "yyyy-MM-dd HH:mm:ss") }}</div>'
+                }, {
+                    field: 'outTime',
+                    title: '出库时间',
+                    templet: '<div>{{ layui.util.toDateString(d.outTime, "yyyy-MM-dd HH:mm:ss") }}</div>'
+                }, {
+                    field: 'cost',
+                    title: '花费'
+                }
+                ]
+            ]
+        });
+
+
+        //监听头工具栏事件---看按钮的lay-event值
+        table.on('toolbar(test)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id)
+                , data = checkStatus.data; //获取选中的数据
+            switch (obj.event) {
+                case 'detail':
+                    layer.msg('添加');
+                    break;
+                case 'edit':
+                    if (data.length === 0) {
+                        layer.msg('请选择一行');
+                    } else if (data.length > 1) {
+                        layer.msg('只能同时编辑一个');
+                    } else {
+                        layer.alert('编辑 [id]：' + checkStatus.data[0].id);
+                    }
+                    break;
+                case 'del':
+                    if (data.length === 0) {
+                        layer.msg('请选择一行');
+                    } else {
+                        layer.msg('删除');
+                    }
+                    break;
+            }
+        });
+
+        //实现条件查询 并且刷新表格
+        //  js   document.getElementById("search").onclick=function(){}
+        $("#search").on('click', function () {
+            //向后台发送请求并且刷新表格
+            tableIns.reload({
+                url: "/tingche/parklog/selectByTypeOrName",
+                where: { //设定异步数据接口的额外参数，任意设
+                    'id': $("#ID").val()
+                    , 'useid': $("#USEID").val()
+                    //…
+                }
+                , page: {
+                    curr: 1 //重新从第 1 页开始
+                }
+            });
+
+        })
+    })
+</script>
+
+</html>

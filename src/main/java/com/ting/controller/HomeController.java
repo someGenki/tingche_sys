@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 主页跳转功能
+ * @Author 卢元庆
  */
 @Controller
 @RequestMapping("/home")

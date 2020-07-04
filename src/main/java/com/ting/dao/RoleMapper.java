@@ -25,8 +25,5 @@ public interface RoleMapper {
     @Select("select count(role_id) from role")
     int getCount();
 
-
-
-
     int updateByPrimaryKey(Role record);
 }

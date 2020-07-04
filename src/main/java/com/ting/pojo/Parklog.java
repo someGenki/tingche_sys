@@ -18,6 +18,20 @@ public class Parklog implements Serializable {
 
     private Float cost;
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Parklog{");
+        sb.append("logId=").append(logId);
+        sb.append(", userId=").append(userId);
+        sb.append(", parkId=").append(parkId);
+        sb.append(", plate='").append(plate).append('\'');
+        sb.append(", rinTime=").append(rinTime);
+        sb.append(", outTime=").append(outTime);
+        sb.append(", cost=").append(cost);
+        sb.append('}');
+        return sb.toString();
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getLogId() {

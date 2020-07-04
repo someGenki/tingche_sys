@@ -5,7 +5,7 @@ import com.ting.dao.RoleMapper;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 
-//老的办法 “返璞归真”
+// “返璞归真”
 @WebServlet("/test")
 public class TestServlet extends javax.servlet.http.HttpServlet {
     @Override

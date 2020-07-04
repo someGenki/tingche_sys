@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- * 用户功能
- * @Author:卢元庆
+ * 用户角色功能
+ *
+ * @Author 卢元庆
  */
 @Controller
 @RequestMapping("/role")

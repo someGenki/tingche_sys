@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
+    <!--    Author 卢元庆-->
     <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui/css/layui.css"/>
@@ -83,6 +85,7 @@
         }
     </style>
 </head>
+
 <body>
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
@@ -90,38 +93,44 @@
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md4">
                     <div style="height: 210px" class="layui-card">
-                        <div class="layui-card-header"><h2>小组成员 <i class="layui-icon layui-icon-group"
-                                                                   style=" color: #1E9FFF;"></i></h2></div>
+                        <div class="layui-card-header">
+                            <h2>小组成员 <i class="layui-icon layui-icon-group" style=" color: #1E9FFF;"></i></h2>
+                        </div>
                         <div class="layui-card-body">
                             <ul id="zuyuan">
-                                <li style="text-align: center">组长：<i class="layui-icon layui-icon-male"></i> 卢元庆</li>
-                                <li style="text-align: center">组员：<i class="layui-icon layui-icon-male"></i> 谢川东</li>
-                                <li style="text-align: center">组员：<i class="layui-icon layui-icon-male"></i> 李沅泽</li>
-                                <li style="text-align: center">组员：<i class="layui-icon layui-icon-male"></i><span
-                                        style="opacity: 0">林</span> 林雄
+                                <li>组长：<i class="layui-icon layui-icon-male"></i> 卢元庆- 系统管理/首页
                                 </li>
-                                <li style="text-align: center">组员：<i class="layui-icon layui-icon-female"></i> 孙菊红</li>
+                                <li>组员：<i class="layui-icon layui-icon-male"></i> 谢川东- 计费出库模块
+                                </li>
+                                <li>组员：<i class="layui-icon layui-icon-male"></i> 李沅泽- 车辆入库模块
+                                </li>
+                                <li>组员：<i class="layui-icon layui-icon-male"></i><span
+                                        style="opacity: 0">林</span> 林雄- 车库管理模块
+                                </li>
+                                <li>组员：<i class="layui-icon layui-icon-female"></i> 孙菊红- 出入库日志管理
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="layui-col-md8">
                     <div style="height: 210px" class="layui-card">
-                        <div class="layui-card-header"><h2>项目进度 <i class="layui-icon layui-icon-time"
-                                                                   style=" color: #1E9FFF;"></i></h2></div>
+                        <div class="layui-card-header">
+                            <h2>项目进度 <i class="layui-icon layui-icon-time" style=" color: #1E9FFF;"></i></h2>
+                        </div>
                         <div class="layui-card-body">
                             后端部分
                             <div class="layui-progress layui-progress-big" lay-showPercent="yes">
-                                <div class="layui-progress-bar layui-bg-green" lay-percent="50%"></div>
+                                <div class="layui-progress-bar layui-bg-green" lay-percent="70%"></div>
                             </div>
                             前端部分
                             <div class="layui-progress layui-progress-big" lay-showPercent="yes">
-                                <div class="layui-progress-bar layui-bg-blue" lay-percent="60%"></div>
+                                <div class="layui-progress-bar layui-bg-blue" lay-percent="90%"></div>
                             </div>
                             答辩部分
                             <div class="layui-progress layui-progress-big" lay-showPercent="yes">
                                 <!--                                TODO 待修改-->
-                                <div class="layui-progress-bar layui-bg-red" lay-percent="10%"></div>
+                                <div class="layui-progress-bar layui-bg-red" lay-percent="80%"></div>
                             </div>
                         </div>
                     </div>
@@ -131,7 +140,6 @@
                         <div class="layui-card-header">
                             <h2 style="text-align: center;font-weight: bold">当前所在车库状况 <i
                                     class="layui-icon layui-icon-console"></i></h2>
-
                         </div>
                         <div class="layui-card-body">
 
@@ -161,9 +169,8 @@
                                     </a>
                                 </li>
                             </ul>
-                            <h3> 车库位置：<a
-                                    style="color: rgb(0,150,136)"
-                                    href="https://www.baidu.com/s?ie=UTF-8&wd=%E9%87%8D%E5%BA%86%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA%E5%A4%A7%E5%AD%A6%E5%9F%8E%E4%B8%9C%E8%B7%AF20%E5%8F%B7"><span
+                            <h3> 车库位置<i class="layui-icon layui-icon-location"></i>： <a style="color: rgb(0,150,136)"
+                                                                                        href="https://www.baidu.com/s?ie=UTF-8&wd=%E9%87%8D%E5%BA%86%E6%B2%99%E5%9D%AA%E5%9D%9D%E5%8C%BA%E5%A4%A7%E5%AD%A6%E5%9F%8E%E4%B8%9C%E8%B7%AF20%E5%8F%B7"><span
                                     id="site">1111</span></a></h3>
                             <fieldset class="layui-elem-field layui-field-title" style="margin: 10px 0 10px;">
                                 <legend> 车库使用率:</legend>
@@ -181,8 +188,9 @@
         </div>
         <div class="layui-col-md5" style="overflow: hidden">
             <div class="layui-card">
-                <div class="layui-card-header"><h2>项目介绍 <i class="layui-icon layui-icon-app"
-                                                           style=" color: #1E9FFF;"></i></h2></div>
+                <div class="layui-card-header">
+                    <h2>项目介绍 <i class="layui-icon layui-icon-app" style=" color: #1E9FFF;"></i></h2>
+                </div>
                 <div class="layui-card-body">
                     <h3>题目-停车场管理系统</h3>
                     <div class="layui-elem-quote">
@@ -198,6 +206,7 @@
                     <div class="layui-elem-quote">
                         <ul>
                             <dl>系统管理</dl>
+                            <dl>车辆入库</dl>
                             <dl>车辆计费</dl>
                             <dl>车库信息管理</dl>
                             <dl>车辆出入库日志登记</dl>
@@ -239,9 +248,10 @@
                 document.getElementById("site").innerHTML = pp.parkSite;
                 element.progress('pp', `${(pp.currentUse / pp.usableCapacity) * 100}%`)
             })
-        }, 300)
+        }, 400)
     });
 </script>
 
 </body>
+
 </html>

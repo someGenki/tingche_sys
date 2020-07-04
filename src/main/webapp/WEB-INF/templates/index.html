@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!--    Author 卢元庆 谢川东 李沅泽 林雄 孙菊红-->
     <meta charset="utf-8">
     <link rel="icon" href="img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -44,13 +45,13 @@
                     <dl class="layui-nav-child">
                         <dd><a href="templates/createUser.html" target="ifr">创建管理员</a></dd>
                         <dd><a href="templates/userStatus.html" target="ifr">管理员账户管理</a></dd>
-                        <!--                        <dd><a href="/" target="ifr">角色修改</a></dd>-->
+                        <!--         流产               <dd><a href="/" target="ifr">角色修改</a></dd>-->
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="#">车辆计费</a></li>
+                <li class="layui-nav-item"><a href="templates/toll.html" target="ifr">车辆计费</a></li>
                 <li class="layui-nav-item"><a href="templates/carin.html" target="ifr">车辆入库</a></li>
-                <li class="layui-nav-item"><a href="#">车库管理</a></li>
-                <li class="layui-nav-item"><a href="#">出入库日志</a></li> <!--表格-->
+                <li class="layui-nav-item"><a href="templates/WearhouseQuery.html" target="ifr">车库管理</a></li>
+                <li class="layui-nav-item"><a href="templates/instop.html" target="ifr">出入库日志</a></li> <!--表格-->
                 <li class="layui-nav-item"><a target="_blank" href="https://www.layui.com/doc/">lay-ui文档</a></li>
             </ul>
         </div>
@@ -70,7 +71,6 @@
     //JavaScript代码区域
     layui.use('element', function () {
         var element = layui.element;
-        console.log(element)
     });
 </script>
 </body>

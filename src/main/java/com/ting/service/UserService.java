@@ -1,6 +1,5 @@
 package com.ting.service;
 
-import com.ting.pojo.Role;
 import com.ting.pojo.User;
 
 import java.util.List;

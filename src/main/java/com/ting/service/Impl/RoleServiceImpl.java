@@ -10,7 +10,6 @@ import java.util.List;
 
 @Service
 public class RoleServiceImpl implements RoleService {
-    // Unsatisfied dependency expressed through field 'service';
 
     @Autowired
     RoleMapper mapper;
